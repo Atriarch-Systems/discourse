@@ -146,11 +146,6 @@ $hpad: 0.65em;
 @mixin d-animation($name, $duration, $easing: ease) {
   animation: $name $duration $easing forwards;
 
-  @media (prefers-reduced-motion) {
-    animation-duration: 0s;
-  }
-}
-
 @mixin default-focus() {
   border-color: var(--d-input-focused-color);
   outline: 2px solid var(--d-input-focused-color);
