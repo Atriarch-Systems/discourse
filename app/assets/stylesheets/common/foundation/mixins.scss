@@ -124,7 +124,7 @@ $hpad: 0.65em;
   padding: $vpad $hpad;
 }
 
-// Used to handle -webkit prefix, but now we have autoprefixer
+// Used to handle -webkit prefix, but now we have f
 // Keeping for backward-compat with plugins/themes only
 @mixin user-select($mode) {
   user-select: $mode;
@@ -145,6 +145,11 @@ $hpad: 0.65em;
 
 @mixin d-animation($name, $duration, $easing: ease) {
   animation: $name $duration $easing forwards;
+
+  @media (prefers-reduced-motion) {
+    animation-duration: 0s;
+  }
+}
 
 @mixin default-focus() {
   border-color: var(--d-input-focused-color);
