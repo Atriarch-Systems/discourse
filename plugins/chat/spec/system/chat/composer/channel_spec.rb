@@ -33,9 +33,9 @@ RSpec.describe "Chat | composer | channel", type: :system do
         channel_page.reply_to(message_1)
 
         expect(channel_page.composer.message_details).to have_message(
-          id: message_1.id,
-          exact_text: "<abbr>abbr</abbr>",
-        )
+                                                           id: message_1.id,
+                                                           exact_text: "<abbr>abbr</abbr>",
+                                                         )
       end
     end
 
@@ -77,9 +77,9 @@ RSpec.describe "Chat | composer | channel", type: :system do
         channel_page.edit_message(message_1, "instant")
 
         expect(channel_page.messages).to have_message(
-          text: message_1.message + " instant",
-          persisted: false,
-        )
+                                           text: message_1.message + " instant",
+                                           persisted: false,
+                                         )
       end
     end
 
@@ -118,6 +118,33 @@ RSpec.describe "Chat | composer | channel", type: :system do
       page.find(".chat-reply").click
 
       expect(channel_page.messages).to have_message(id: message_1.id, highlighted: true)
+    end
+  end
+
+  describe "emoji autocomplete with picker" do
+    let(:emoji_picker) { PageObjects::Components::EmojiPicker.new }
+
+    it "preserves message draft when selecting emoji from picker via 'more...'" do
+      chat_page.visit_channel(channel_1)
+
+      channel_page.composer.input.send_keys("Hello :gri")
+
+      expect(page).to have_css(".autocomplete.ac-emoji")
+      find(".autocomplete.ac-emoji ul li", text: "more").click
+      expect(page).to have_css(".emoji-picker")
+      find(".emoji-picker .emoji", match: :first).click
+
+      actual_value = channel_page.composer.value
+      puts "DEBUG: Actual composer value after emoji selection: '#{actual_value}'"
+
+      expect(actual_value).to start_with("Hello :"),
+                              "Expected message to preserve 'Hello' but got: '#{actual_value}'"
+
+      expect(actual_value).not_to end_with(":gri"),
+                                  "Expected :gri to be replaced with emoji but got: '#{actual_value}'"
+
+      expect(actual_value).to match(/Hello :\w+:$/),
+                              "Expected format 'Hello :emoji_name:' but got: '#{actual_value}'"
     end
   end
 end
