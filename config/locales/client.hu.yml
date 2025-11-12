@@ -859,7 +859,6 @@ hu:
         note_added_by: "%{username} moderátor megjegyzése · %{relativeDate}"
         no_events: "Nincsenek megjeleníthető idővonal-események"
       notes:
-        add_note_description: "Csak a moderátorok láthatják. Ezzel a megjegyzéssel kontextust vagy döntéseket hozhatsz a véleményezéssel kapcsolatban."
         add_note_button: "Megjegyzés hozzáadása"
         placeholder: "Írd ide a jegyzetedet..."
         chars_remaining: "%{count} karakter maradt"

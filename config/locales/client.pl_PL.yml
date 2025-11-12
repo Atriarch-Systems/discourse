@@ -1003,7 +1003,7 @@ pl_PL:
         note_added_by: "Uwaga moderatora %{username} - %{relativeDate}"
         no_events: "Brak zdarzeń na osi czasu do wyświetlenia"
       notes:
-        add_note_description: "Widoczne tylko dla moderatorów. Użyj tej uwagi, aby dodać kontekst lub decyzje dotyczące przeglądu."
+        add_note_description: "Dodaj uwagę, aby zapewnić kontekst innym moderatorom."
         add_note_button: "Dodaj uwagę"
         placeholder: "Tutaj napisz swoją uwagę..."
         chars_remaining: "Pozostałe znaki: %{count}"

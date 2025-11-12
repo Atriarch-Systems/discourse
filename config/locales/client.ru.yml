@@ -982,7 +982,6 @@ ru:
         note_added_by: "Примечание модератора %{username} · %{relativeDate}"
         no_events: "Событий в хронологии нет"
       notes:
-        add_note_description: "Видно только модераторам. Используйте это примечание, чтобы добавить контекст или решения по проверке."
         add_note_button: "Добавить примечание"
         placeholder: "Напишите примечание тут..."
         chars_remaining: "Осталось символов: %{count} ..."

@@ -869,7 +869,6 @@ ug:
         note_added_by: "%{username} · %{relativeDate} رىياسەتچى ئىزاھاتى"
         no_events: "كۆرسىتىدىغان ۋاقىت سىزىقى پائالىيىتى يوق"
       notes:
-        add_note_description: "رىياسەتچىگىلا كۆرۈنىدى. بۇ ئىزاھات ئارقىلىق تەكشۈرۈپ تەستىقلاشقا مۇناسىۋەتلىك مەزمۇن ياكى قارار قوشۇلىدۇ."
         add_note_button: "ئىزاھات قوش"
         placeholder: "بۇ جايغا ئىزاھاتىڭىزنى يېزىڭ…"
         chars_remaining: "%{count} ھەرپ قالدى"

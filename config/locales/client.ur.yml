@@ -858,7 +858,6 @@ ur:
         note_added_by: "نگران کا نوٹ بذریعہ %{username} · %{relativeDate}"
         no_events: "ظاہر کرنے کے لیے کوئی ٹائم لائن ایونٹس نہیں"
       notes:
-        add_note_description: "صرف منتظمین کے لیے مرئی۔ جائزہ کے بارے میں سیاق و سباق یا فیصلے شامل کرنے کے لیے اس نوٹ کا استعمال کریں۔"
         add_note_button: "نوٹ کا اضافہ"
         placeholder: "اپنا نوٹ یہاں لکھیں۔۔۔"
         chars_remaining: "%{count} حروف باقی ہیں"

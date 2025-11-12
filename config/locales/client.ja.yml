@@ -788,7 +788,6 @@ ja:
         note_added_by: "%{username} のモデレーターメモ · %{relativeDate}"
         no_events: "表示するタイムラインイベントはありません"
       notes:
-        add_note_description: "モデレーターのみに表示されます。このメモを使用して、レビューの背景情報や決定事項を追加してください。"
         add_note_button: "メモを追加"
         placeholder: "ここにメモを入力してください..."
         chars_remaining: "残り %{count} 文字"

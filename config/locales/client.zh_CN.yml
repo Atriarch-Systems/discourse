@@ -807,7 +807,6 @@ zh_CN:
         note_added_by: "%{username} 的版主注释 · %{relativeDate}"
         no_events: "没有可显示的时间线事件"
       notes:
-        add_note_description: "仅对版主可见。使用此注释来添加有关审核的背景信息或决定。"
         add_note_button: "添加注释"
         placeholder: "在这里写下您的注释…"
         chars_remaining: "剩余 %{count} 个字符"

@@ -852,7 +852,6 @@ it:
         note_added_by: "Note del moderatore di %{username} · %{relativeDate}"
         no_events: "Nessun evento nella cronologia da visualizzare"
       notes:
-        add_note_description: "Visibile solo ai moderatori. Utilizza queste note per aggiungere contesto o prendere decisioni sulla revisione."
         add_note_button: "Aggiungi note"
         placeholder: "Scrivi qui le tue note..."
         chars_remaining: "%{count} caratteri rimasti"

@@ -852,7 +852,6 @@ pt_BR:
         note_added_by: "Observação da moderação por %{username} - %{relativeDate}"
         no_events: "Não há eventos da linha do tempo para exibir"
       notes:
-        add_note_description: "Visível apenas para a moderarção. Use esta observação para adicionar contexto ou decisões sobre a revisão."
         add_note_button: "Adicionar observação"
         placeholder: "Escreva sua observação aqui..."
         chars_remaining: "%{count} caractere(s) restante(s)"

@@ -852,7 +852,6 @@ tr_TR:
         note_added_by: "%{username} tarafından moderatör notu · %{relativeDate}"
         no_events: "Gösterilecek zaman çizelgesi etkinliği yok"
       notes:
-        add_note_description: "Yalnızca moderatörler tarafından görülebilir. Bu notu incelemeyle ilgili bağlam veya kararlar eklemek için kullanın."
         add_note_button: "Not ekle"
         placeholder: "Notunuzu buraya yazın..."
         chars_remaining: "%{count} karakter kaldı"

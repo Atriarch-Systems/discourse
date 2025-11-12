@@ -985,7 +985,6 @@ he:
         note_added_by: "הערת פיקוח מאת %{username} · %{relativeDate}"
         no_events: "אין אירועי ציר זמן להצגה"
       notes:
-        add_note_description: "גלוי רק למפקחים. אפשר להשתמש בהערה הזאת כדי להוסיף הקשר או החלטות בנוסע לסקירה."
         add_note_button: "הוספת הערה"
         placeholder: "כאן ניתן לכתוב את ההערה שלך…"
         chars_remaining: "נותרו %{count} תווים"

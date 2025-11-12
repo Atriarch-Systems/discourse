@@ -852,7 +852,6 @@ es:
         note_added_by: "Nota del moderador creada por %{username} · %{relativeDate}"
         no_events: "No hay eventos que mostrar en la línea de tiempo"
       notes:
-        add_note_description: "Visible solo para moderadores. Usa esta nota para añadir contexto o tomar decisiones sobre la revisión."
         add_note_button: "Añadir nota"
         placeholder: "Escribe tu nota aquí..."
         chars_remaining: "Quedan %{count} caracteres..."

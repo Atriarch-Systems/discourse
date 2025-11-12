@@ -1007,7 +1007,6 @@ cs:
         note_added_by: "Poznámka moderátora od %{username} · %{relativeDate}"
         no_events: "Na časové ose nejsou k zobrazení žádné události"
       notes:
-        add_note_description: "Viditelné pouze pro moderátory. Tuto poznámku použijte k přidání kontextu nebo rozhodnutí o kontrole."
         add_note_button: "Přidat poznámku"
         placeholder: "Napište sem svoji poznámku..."
         chars_remaining: "Zbývá %{count} znaků"

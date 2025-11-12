@@ -867,7 +867,6 @@ de:
         note_added_by: "Moderator-Notiz von %{username} · %{relativeDate}"
         no_events: "Keine Zeitleistenereignisse zum Anzeigen"
       notes:
-        add_note_description: "Nur für Moderatoren sichtbar. Verwende diese Notiz, um Kontext oder Entscheidungen zur Überprüfung hinzuzufügen."
         add_note_button: "Notiz hinzufügen"
         placeholder: "Schreib deine Notiz hier …"
         chars_remaining: "%{count} Zeichen verbleibend"
