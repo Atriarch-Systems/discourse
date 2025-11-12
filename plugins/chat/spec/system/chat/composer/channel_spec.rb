@@ -132,7 +132,11 @@ RSpec.describe "Chat | composer | channel", type: :system do
       expect(page).to have_css(".autocomplete.ac-emoji")
       find(".autocomplete.ac-emoji ul li", text: "more").click
       expect(page).to have_css(".emoji-picker")
-      find(".emoji-picker .emoji", match: :first).click
+      # Find an actual selectable emoji (has data-emoji attribute), not a section header
+      emoji_element = find(".emoji-picker .emoji[data-emoji]", match: :first)
+      puts "DEBUG: Found emoji element: #{emoji_element.tag_name} with classes: #{emoji_element[:class]}"
+      puts "DEBUG: Emoji data-emoji: #{emoji_element[:"data-emoji"]}"
+      emoji_element.click
 
       actual_value = channel_page.composer.value
       puts "DEBUG: Actual composer value after emoji selection: '#{actual_value}'"
