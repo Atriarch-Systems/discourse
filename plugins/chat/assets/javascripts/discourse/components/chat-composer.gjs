@@ -422,8 +422,34 @@ export default class ChatComposer extends Component {
   }
 
   @action
-  onSelectEmoji(emoji) {
-    this.composer.textarea.emojiSelected(emoji);
+  onSelectEmoji(emoji, context = null) {
+    const textarea = this.composer.textarea;
+    const value = textarea?.textarea?.value;
+
+    // Use provided context to replace incomplete emoji
+    // This context contains the position captured before focus loss
+    if (
+      context?.incompleteStart !== undefined &&
+      context?.incompleteEnd !== undefined
+    ) {
+      const newValue =
+        value.substring(0, context.incompleteStart) +
+        `:${emoji}:` +
+        value.substring(context.incompleteEnd + 1);
+
+      textarea.value = newValue;
+
+      const newPos = context.incompleteStart + emoji.length + 2;
+      textarea.textarea.setSelectionRange(newPos, newPos);
+
+      if (this.site.desktopView) {
+        this.composer.focus();
+      }
+      return;
+    }
+
+    // Fallback: use default emoji insertion behavior
+    textarea?.emojiSelected(emoji);
 
     if (this.site.desktopView) {
       this.composer.focus();
@@ -543,6 +569,27 @@ export default class ChatComposer extends Component {
         if (v.code) {
           return `${v.code}:`;
         } else {
+          // Capture incomplete emoji position BEFORE keyboard closes
+          // because waitForClosedKeyboard() causes focus loss which resets caret position
+          const composerTextarea = this.composer.textarea;
+          const currentValue = composerTextarea?.textarea?.value;
+          const currentCaretPos = composerTextarea?.textarea?.selectionStart;
+
+          let incompleteEmojiContext = null;
+
+          if (currentValue && currentCaretPos !== undefined) {
+            const textBeforeCursor = currentValue.substring(0, currentCaretPos);
+            const incompleteMatch = textBeforeCursor.match(/(:[\w-]+)$/);
+
+            if (incompleteMatch) {
+              incompleteEmojiContext = {
+                incompleteStart: currentCaretPos - incompleteMatch[1].length,
+                incompleteEnd: currentCaretPos - 1,
+                term: incompleteMatch[1].substring(1),
+              };
+            }
+          }
+
           const menuOptions = {
             identifier: "emoji-picker",
             groupIdentifier: "emoji-picker",
@@ -551,7 +598,7 @@ export default class ChatComposer extends Component {
             modalForMobile: true,
             data: {
               didSelectEmoji: (emoji) => {
-                this.onSelectEmoji(emoji);
+                this.onSelectEmoji(emoji, incompleteEmojiContext);
               },
               term: v.term,
               context: "chat",
