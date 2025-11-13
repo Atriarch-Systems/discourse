@@ -10,7 +10,7 @@ export default class ChatMessagesScroller extends Component {
   @action
   async lockBody(element) {
     const bodyScrollLock = await loadTuaBodyScrollLock();
-    bodyScrollLock.lock(element);
+    bodyScrollLock.lock(element, { overflowType: "clip" });
   }
 
   @action
