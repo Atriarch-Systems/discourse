@@ -4,33 +4,31 @@ import { service } from "@ember/service";
 import { tagName } from "@ember-decorators/component";
 import { modifier } from "ember-modifier";
 import componentForRow from "discourse/helpers/component-for-row";
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  locks,
-} from "discourse/lib/body-scroll-lock";
+import loadTuaBodyScrollLock from "discourse/lib/load-tua-body-scroll-lock";
 import { resolveComponent } from "discourse/select-kit/components/select-kit";
 
 @tagName("")
 export default class SelectKitCollection extends Component {
   @service site;
 
-  bodyScrollLock = modifier((element) => {
+  bodyScrollLock = modifier(async (element) => {
     if (this.site.desktopView) {
       return;
     }
 
-    const isChildOfLock = locks.some((lock) =>
-      lock.targetElement.contains(element)
-    );
+    const bodyScrollLock = await loadTuaBodyScrollLock();
+
+    const isChildOfLock = bodyScrollLock
+      .getLockState()
+      .lockedElements.some((lock) => lock.targetElement.contains(element));
 
     if (isChildOfLock) {
-      disableBodyScroll(element);
+      bodyScrollLock.lock(element);
     }
 
     return () => {
       if (isChildOfLock) {
-        enableBodyScroll(element);
+        bodyScrollLock.unlock(element);
       }
     };
   });

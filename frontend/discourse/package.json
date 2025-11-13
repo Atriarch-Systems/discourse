@@ -78,7 +78,8 @@
     "prosemirror-state": "^1.4.4",
     "prosemirror-transform": "^1.10.5",
     "prosemirror-view": "^1.41.3",
-    "rrule": "^2.8.1"
+    "rrule": "^2.8.1",
+    "tua-body-scroll-lock": "^1.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",

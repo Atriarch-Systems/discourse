@@ -1,11 +1,8 @@
 import { registerDestructor } from "@ember/destroyable";
 import { service } from "@ember/service";
 import Modifier from "ember-modifier";
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-} from "discourse/lib/body-scroll-lock";
 import { bind } from "discourse/lib/decorators";
+import loadTuaBodyScrollLock from "discourse/lib/load-tua-body-scroll-lock";
 import SwipeEvents from "discourse/lib/swipe-events";
 /**
  * A modifier for handling swipe gestures on an element.
@@ -58,7 +55,7 @@ export default class SwipeModifier extends Modifier {
    * @param {boolean} options.enabled - Flag to enable/disable swipe.
    * @param {boolean} options.lockBody - Automatically enable/disable body scroll lock.
    */
-  modify(
+  async modify(
     element,
     _,
     {
@@ -74,6 +71,8 @@ export default class SwipeModifier extends Modifier {
       this.enabled = enabled;
       return;
     }
+
+    this.bodyScroll = await loadTuaBodyScrollLock();
 
     this.lockBody = lockBody ?? true;
     this.element = element;
@@ -98,7 +97,7 @@ export default class SwipeModifier extends Modifier {
   @bind
   onDidStartSwipe(event) {
     if (this.lockBody) {
-      disableBodyScroll(this.element);
+      this.bodyScroll.lock(this.element);
     }
 
     this.onDidStartSwipeCallback?.(event.detail);
@@ -111,7 +110,7 @@ export default class SwipeModifier extends Modifier {
   @bind
   onDidEndSwipe() {
     if (this.lockBody) {
-      enableBodyScroll(this.element);
+      this.bodyScroll.unlock(this.element);
     }
 
     this.onDidEndSwipeCallback?.(event.detail);
@@ -133,7 +132,7 @@ export default class SwipeModifier extends Modifier {
   @bind
   onDidCancelSwipe(event) {
     if (this.lockBody) {
-      enableBodyScroll(this.element);
+      this.bodyScroll.unlock(this.element);
     }
 
     this.onDidCancelSwipeCallback?.(event.detail);
@@ -163,7 +162,7 @@ export default class SwipeModifier extends Modifier {
     this._swipeEvents.removeTouchListeners();
 
     if (this.lockBody) {
-      enableBodyScroll(this.element);
+      this.bodyScroll.unlock(this.element);
     }
   }
 }

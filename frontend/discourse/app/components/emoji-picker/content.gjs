@@ -19,15 +19,12 @@ import withEventValue from "discourse/helpers/with-event-value";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { uniqueItemsFromArray } from "discourse/lib/array-tools";
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-} from "discourse/lib/body-scroll-lock";
 import discourseDebounce from "discourse/lib/debounce";
 import { bind } from "discourse/lib/decorators";
 import { INPUT_DELAY } from "discourse/lib/environment";
 import { makeArray } from "discourse/lib/helpers";
 import loadEmojiSearchAliases from "discourse/lib/load-emoji-search-aliases";
+import loadTuaBodyScrollLock from "discourse/lib/load-tua-body-scroll-lock";
 import { emojiUrlFor } from "discourse/lib/text";
 import autoFocus from "discourse/modifiers/auto-focus";
 import preventScrollOnFocus from "discourse/modifiers/prevent-scroll-on-focus";
@@ -71,23 +68,26 @@ export default class EmojiPicker extends Component {
 
   scrollableNode;
 
-  setupSectionsNavScroll = modifierFn((element) => {
-    disableBodyScroll(element);
+  setupSectionsNavScroll = modifierFn(async (element) => {
+    const bodyScrollLock = await loadTuaBodyScrollLock();
+    bodyScrollLock.lock(element);
 
     return () => {
-      enableBodyScroll(element);
+      bodyScrollLock.unlock(element);
     };
   });
 
-  scrollListener = modifierFn((element) => {
+  scrollListener = modifierFn(async (element) => {
+    const bodyScrollLock = await loadTuaBodyScrollLock();
+
     this.scrollableNode = element;
-    disableBodyScroll(element);
+    bodyScrollLock.lock(element);
     element.addEventListener("scroll", this._handleScroll);
 
     return () => {
       this.scrollableNode = null;
       element.removeEventListener("scroll", this._handleScroll);
-      enableBodyScroll(element);
+      bodyScrollLock.unlock(element);
     };
   });
 
